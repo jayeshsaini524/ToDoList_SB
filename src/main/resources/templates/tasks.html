@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <style>
+        span {
+            color: rgb(255, 81, 0);
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>ToDoApp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>To Do List</h1>
+
+    <!-- Post Request -->
+    <form action="/tasks/add" method="post">
+        <input type="text" name="taskName" placeholder="enter_taks_name" required>
+        <button type="submit">enter</button>
+    </form>
+     
+    <!-- PUT Request Testing -->
+    <!-- <form action="/tasks/put/{id}()" method="post">
+        <input type="text" name="taskName" placeholder="enter_taks_name" required>
+        <button type="submit">enter</button>
+    </form> -->
+
+    <!-- Get Request -->
+    <div>
+        <th:block th:each = "task:${tasks}">
+            <div>
+                <span th:text="${task.title}"></span>
+                <span th:text="${task.completed}"></span><!-- shows status of task -->
+                <div class="buttons">
+                    <button>
+                        <a class="edit" th:href="@{/tasks/toggle/{id}(id=${task.id})}">Toggle</a>
+                    </button>
+                    <button>
+                        <a class="delete" th:href="@{/tasks/delete/{id}(id=${task.id})}">Delete</a>
+                    </button>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+</body>
+</html>
